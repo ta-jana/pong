@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    scene = new QGraphicsScene(this);
     gameTimer = new QTimer(this);
 
     paddle1 = new QGraphicsRectItem(0,0,80,20);
@@ -18,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent)
     ball = new QGraphicsEllipseItem(0, 0, 15, 15);
     ball->setBrush(QBrush(Qt::magenta));
 
-    scene = new QGraphicsScene(this);
 
     scene->addItem(paddle1);
     scene->addItem(paddle2);
