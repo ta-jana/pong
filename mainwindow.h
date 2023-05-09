@@ -15,7 +15,16 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
+    void mouseMoveEvent(QMouseEvent *event);
+
+
+
+
     ~MainWindow();
+
+private slots:
+    void catchTheMouse();
 
 private:
     Ui::MainWindow *ui;
