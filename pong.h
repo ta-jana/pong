@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsScene>
+#include <QTimer>
 
 class pong : public QObject
 {
@@ -10,7 +11,24 @@ class pong : public QObject
 public:
     explicit pong(QGraphicsScene & scene, QGraphicsItem *paddle1, QGraphicsItem *paddle2, QGraphicsItem *ball,QObject *parent = nullptr);
 
+        int x, y;
+
 signals:
+    void goal(int player);
+
+private slots:
+    void play();
+
+private:
+    int calculatePaddle2Direction();
+
+    QTimer *gameTimer;
+
+    QGraphicsScene & gameScene;
+    QGraphicsItem *paddle1, *paddle2, *ball;
+    int paddle1Dir, paddle2Dir;
+    QPointF ballDir;
+
 
 };
 

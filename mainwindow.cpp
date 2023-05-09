@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "qboxlayout.h"
+#include "pong.h"
 #include "ui_mainwindow.h"
 #include <QGraphicsRectItem>
 #include <QMouseEvent>
@@ -10,44 +10,28 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    scene = new QGraphicsScene(this);
-    gameTimer = new QTimer(this);
-    gameTimer->setInterval(300);
-    gameTimer->start();
 
-    QObject::connect(gameTimer, SIGNAL(timeout()), this,
-                     SLOT(catchTheMouse()));
+    QGraphicsScene *scene = new QGraphicsScene(this);
 
-    paddle1 = new QGraphicsRectItem(0,0,20,80);
-    paddle1->setBrush(QBrush(Qt::blue));
+    QGraphicsRectItem *p1 = new QGraphicsRectItem(0, 0, 80, 20);
+    p1->setBrush(QBrush(Qt::blue));
+    QGraphicsRectItem *p2 = new QGraphicsRectItem(0, 0, 80, 20);
+    p2->setBrush(QBrush(Qt::green));
 
-    paddle2 = new QGraphicsRectItem(100,0,20,80);
-    paddle2->setBrush(QBrush(Qt::yellow));
-
-    ball = new QGraphicsEllipseItem(100, 0, 15, 15);
+    QGraphicsEllipseItem *ball = new QGraphicsEllipseItem(0, 0, 30, 30);
     ball->setBrush(QBrush(Qt::magenta));
-
-
-    scene->addItem(paddle1);
-    scene->addItem(paddle2);
-    scene->addItem(ball);
-
-
 
     ui->graphicsView->setScene(scene);
 
+    game = new pong(*scene, p1, p2, ball, this);
+
+
+
+
+
 
 }
 
-void MainWindow::mouseMoveEvent(QMouseEvent *event)
-{
-   ui->mousePosition->setText( "Mouse pos x is: "
-             + QString::number(event->position().x()) + "y>" +
-                QString::number(event->position().y()) + "..." );
-
-   qDebug() << "Mouse pos x is: " << event->position().x() << "..." ;
-   qDebug() << "Mouse pos y is: " << event->position().y() << "..." ;
-}
 
 void MainWindow::catchTheMouse()
 {

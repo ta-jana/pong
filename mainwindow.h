@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include "scene.h"
+
+class pong;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,11 +17,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
 
-    void mouseMoveEvent(QMouseEvent *event);
-
-
-
-
     ~MainWindow();
 
 private slots:
@@ -28,13 +24,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QTimer *gameTimer;
 
-    QGraphicsScene *scene;
-
-    QGraphicsRectItem *paddle1;
-    QGraphicsRectItem *paddle2;
-    QGraphicsEllipseItem *ball;
+    pong *game;
 
 };
 #endif // MAINWINDOW_H

@@ -11,13 +11,11 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    pong.cpp \
-    scene.cpp
+    pong.cpp
 
 HEADERS += \
     mainwindow.h \
-    pong.h \
-    scene.h
+    pong.h
 
 FORMS += \
     mainwindow.ui
