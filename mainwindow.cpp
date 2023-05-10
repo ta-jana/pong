@@ -7,7 +7,9 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow),
+      scorePlayer(0),
+      scorePC(0)
 {
     ui->setupUi(this);
 
@@ -31,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setMaximumSize(m);
     ui->graphicsView->setMinimumSize(m);
 
+    QObject::connect(game, SIGNAL(goal(int)),
+                     this, SLOT(score(int)));
+
 }
 
 
@@ -38,6 +43,25 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::score(int count)
+{
+    QString score;
+
+    if(count > 0){
+        // pc looser
+        scorePlayer += 1;
+        score = QString::number(scorePlayer);
+        ui->usersWins->setText(score);
+    }
+    else if (count < 0){
+        //user lost
+        scorePC += 1;
+        score = QString::number(scorePC);
+        ui->pcWins->setText(score);
+
+    }
 }
 
 

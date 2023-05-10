@@ -52,8 +52,10 @@ void pong::play()
 
     if ( ( newX < 0 ) || ( newX + ball->boundingRect().right() > gameScene.sceneRect().right() ) )
     {
+        emit goal(ballDir.rx());
         ballDir.rx() *= -1;
         qDebug() << "Ball Direction x  is: " << ballDir.rx() << "..." ;
+
 
     }
     if ( ( newY < 0 ) || ( newY + ball->boundingRect().bottom() > gameScene.sceneRect().bottom() ) )

@@ -20,11 +20,14 @@ public:
     ~MainWindow();
 
 private slots:
+    void score(int count);
+
 
 private:
     Ui::MainWindow *ui;
 
     pong *game;
+    int scorePlayer, scorePC;
 
 };
 #endif // MAINWINDOW_H
