@@ -1,19 +1,22 @@
 #include "pong.h"
 #include "qgraphicsitem.h"
 #include <QGraphicsRectItem>
+#include <QMouseEvent>
+#include <QDebug>
+#include <QCursor>
+#include <QGraphicsView>
 
-
-
-pong::pong(QGraphicsScene & scene, QGraphicsItem *p1,
+pong::pong(QGraphicsView & view, QGraphicsScene & scene, QGraphicsItem *p1,
            QGraphicsItem *p2, QGraphicsItem *ball0,QObject *parent)
     : QObject(parent),
+      gameView(view),
       gameScene(scene),
       paddle1(p1),
       paddle2(p2),
       ball(ball0),    
       paddle1Dir(0),
       paddle2Dir(0),
-      ballDir(-3, 3)
+      ballDir(-5, 5)
 
 {
 
@@ -25,7 +28,7 @@ pong::pong(QGraphicsScene & scene, QGraphicsItem *p1,
 
     paddle1->setPos(5, 105);
     paddle2->setPos(500, 105);
-    ball->setPos(150, 150);
+    ball->setPos(100, 100);
 
 
     gameTimer = new QTimer(this);
@@ -34,6 +37,8 @@ pong::pong(QGraphicsScene & scene, QGraphicsItem *p1,
 
     QObject::connect(gameTimer, SIGNAL(timeout()), this,
                      SLOT(play()));
+    QObject::connect(gameTimer, SIGNAL(timeout()), this,
+                     SLOT(getPlayerMouseMovement()));
 
 }
 
@@ -104,6 +109,23 @@ void pong::play()
 
 }
 
+void pong::getPlayerMouseMovement()
+{
+
+    QPoint p = gameView.mapFromGlobal(QCursor::pos());
+    int y = p.y();
+    // qDebug() << "Mouse pos y is: " << x << "y: " << y ;
+
+    if( y < 30 || y > 260){
+        //do nothing
+        return;
+    }
+
+    paddle1->setPos(0,y-30);
+
+
+}
+
 int pong::calculatePaddle2Direction()
 {
     int dir = 0;
@@ -111,14 +133,14 @@ int pong::calculatePaddle2Direction()
     if ( ball->pos().y() + ballDir.y() > paddle2->sceneBoundingRect().bottom() )
     {
         // move down
-        dir = 7;
+        dir = 10;
 
 
     }
     else if ( ball->pos().y() + ballDir.y() < paddle2->sceneBoundingRect().top() )
     {
         // move up
-        dir = -7;
+        dir = -10;
 
     }
 

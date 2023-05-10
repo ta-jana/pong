@@ -9,7 +9,7 @@ class pong : public QObject
 {
     Q_OBJECT
 public:
-    explicit pong(QGraphicsScene & scene, QGraphicsItem *paddle1, QGraphicsItem *paddle2, QGraphicsItem *ball,QObject *parent = nullptr);
+    explicit pong(QGraphicsView & view,QGraphicsScene & scene, QGraphicsItem *paddle1, QGraphicsItem *paddle2, QGraphicsItem *ball,QObject *parent = nullptr);
 
         int x, y;
 
@@ -18,12 +18,14 @@ signals:
 
 private slots:
     void play();
+    void getPlayerMouseMovement();
 
 private:
     int calculatePaddle2Direction();
 
     QTimer *gameTimer;
 
+    QGraphicsView & gameView;
     QGraphicsScene & gameScene;
     QGraphicsItem *paddle1, *paddle2, *ball;
     int paddle1Dir, paddle2Dir;

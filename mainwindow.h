@@ -20,7 +20,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void catchTheMouse();
 
 private:
     Ui::MainWindow *ui;

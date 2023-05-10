@@ -21,10 +21,8 @@ MainWindow::MainWindow(QWidget *parent)
     QGraphicsEllipseItem *ball = new QGraphicsEllipseItem(0, 0, 15, 15);
     ball->setBrush(QBrush(Qt::red));
 
-
-
     ui->graphicsView->setScene(scene);
-    game = new pong(*scene, paddle1, paddle2, ball, this);
+    game = new pong(*ui->graphicsView ,*scene, paddle1, paddle2, ball, this);
 
     QSize m(scene->sceneRect().size().width() + 10, scene->sceneRect().size().height() + 10);
 
@@ -33,24 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setMaximumSize(m);
     ui->graphicsView->setMinimumSize(m);
 
-
-
-
-
-
-
-
-
 }
 
 
-void MainWindow::catchTheMouse()
-{
-        QPoint p = this->mapFromGlobal(QCursor::pos());
-        int x = p.x();
-        int y = p.y();
-        qDebug() << "Mouse pos y is: " << x << "y: " << y ;
-}
 
 MainWindow::~MainWindow()
 {
