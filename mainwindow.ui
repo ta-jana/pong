@@ -41,9 +41,9 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pauseButton">
        <property name="text">
-        <string>Stop Game</string>
+        <string>Pause</string>
        </property>
       </widget>
      </item>

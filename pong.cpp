@@ -6,10 +6,11 @@
 #include <QCursor>
 #include <QGraphicsView>
 
-pong::pong(QGraphicsView & view, QGraphicsScene & scene, QGraphicsItem *p1,
+pong::pong(QGraphicsView &view, QPushButton &button, QGraphicsScene &scene, QGraphicsItem *p1,
            QGraphicsItem *p2, QGraphicsItem *ball0,QObject *parent)
     : QObject(parent),
       gameView(view),
+      pauseButton(button),
       gameScene(scene),
       paddle1(p1),
       paddle2(p2),
@@ -116,7 +117,6 @@ void pong::getPlayerMouseMovement()
 
     QPoint p = gameView.mapFromGlobal(QCursor::pos());
     int y = p.y();
-    // qDebug() << "Mouse pos y is: " << x << "y: " << y ;
 
     if( y < 30 || y > 260){
         //do nothing
@@ -148,3 +148,17 @@ int pong::calculatePaddle2Direction()
 
     return dir;
 }
+
+void pong::pauseOrResume()
+{
+    if (gameTimer->isActive()) {
+        // If the timer is running, stop it and change the button text to "Resume"
+        gameTimer->stop();
+        pauseButton.setText("Resume");
+    } else {
+        // If the timer is stopped, start it and change the button text to "Pause"
+        gameTimer->start();
+        pauseButton.setText("Pause");
+    }
+}
+

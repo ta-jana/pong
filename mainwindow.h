@@ -23,6 +23,8 @@ private slots:
     void score(int count);
 
 
+    void on_pauseButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

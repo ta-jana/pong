@@ -5,6 +5,8 @@
 #include <QMouseEvent>
 #include <QDebug>
 
+class pong;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
@@ -24,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     ball->setBrush(QBrush(Qt::red));
 
     ui->graphicsView->setScene(scene);
-    game = new pong(*ui->graphicsView ,*scene, paddle1, paddle2, ball, this);
+    game = new pong(*ui->graphicsView ,*ui->pauseButton, *scene, paddle1, paddle2, ball, this);
 
     QSize m(scene->sceneRect().size().width() + 10, scene->sceneRect().size().height() + 10);
 
@@ -35,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QObject::connect(game, SIGNAL(goal(int)),
                      this, SLOT(score(int)));
+
 
 }
 
@@ -64,4 +67,12 @@ void MainWindow::score(int count)
     }
 }
 
+
+
+
+void MainWindow::on_pauseButton_clicked()
+{
+    game->pauseOrResume();
+
+}
 
