@@ -16,12 +16,42 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+   background-color:#f2f5ff;
+}
+
+QPushButton{
+                    outline: 0;
+                    color: #fff;
+                    background-color: #0d6efd;
+                    border-color: #0d6efd;
+                    display: inline-block;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    text-align: center;
+                    border: 1px solid transparent;
+                    padding: 5px 25px;
+                    font-size: 16px;
+                    border-radius: .25rem;
+                    }
+QGraphicsRectItem{
+                    background-color: #0d6efd;
+                }
+                
+QGraphicsView{
+                   background-color: #bacaff;
+}
+
+
+                </string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>11</x>
-      <y>49</y>
+      <x>10</x>
+      <y>60</y>
       <width>521</width>
       <height>271</height>
      </rect>
@@ -29,14 +59,17 @@
     <property name="mouseTracking">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
    </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>0</y>
       <width>482</width>
-      <height>31</height>
+      <height>51</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">

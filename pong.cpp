@@ -31,7 +31,6 @@ pong::pong(QGraphicsView &view, QPushButton &button, QGraphicsScene &scene, QGra
     paddle2->setPos(500, 105);
     ball->setPos(100, 100);
 
-
     gameTimer = new QTimer(this);
     gameTimer->setInterval(30);
     gameTimer->start();
@@ -40,7 +39,6 @@ pong::pong(QGraphicsView &view, QPushButton &button, QGraphicsScene &scene, QGra
                      SLOT(play()));
     QObject::connect(gameTimer, SIGNAL(timeout()), this,
                      SLOT(getPlayerMouseMovement()));
-
 }
 
 void pong::play()
@@ -97,14 +95,11 @@ void pong::play()
         paddle2Dir = 0;
     }
 
-
-
     // calling paddle2 movement
 
     if( rand() % 2 == 0){
          paddle2Dir = calculatePaddle2Direction();
     }
-
 
     ball->moveBy(ballDir.x(), ballDir.y());
     paddle1->moveBy(0, paddle1Dir);
@@ -122,10 +117,7 @@ void pong::getPlayerMouseMovement()
         //do nothing
         return;
     }
-
     paddle1->setPos(0,y-30);
-
-
 }
 
 int pong::calculatePaddle2Direction()
@@ -136,16 +128,12 @@ int pong::calculatePaddle2Direction()
     {
         // move down
         dir = 10;
-
-
     }
     else if ( ball->pos().y() + ballDir.y() < paddle2->sceneBoundingRect().top() )
     {
         // move up
         dir = -10;
-
     }
-
     return dir;
 }
 

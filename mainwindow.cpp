@@ -38,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(game, SIGNAL(goal(int)),
                      this, SLOT(score(int)));
 
-
 }
 
 
@@ -68,11 +67,8 @@ void MainWindow::score(int count)
 }
 
 
-
-
 void MainWindow::on_pauseButton_clicked()
 {
     game->pauseOrResume();
-
 }
 
