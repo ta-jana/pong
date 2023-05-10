@@ -11,17 +11,23 @@ pong::pong(QGraphicsScene & scene, QGraphicsItem *p1,
       paddle1(p1),
       paddle2(p2),
       ball(ball0),
-      ballDir(-2, 2)
+      ballDir(-3, 3)
 {
 
-    gameScene.setSceneRect(0, 0, 350, 350);
+    gameScene.setSceneRect(0, 0, 520, 270);
 
     gameScene.addItem(paddle1);
     gameScene.addItem(paddle2);
     gameScene.addItem(ball);
 
+
+    paddle1->setPos(5, 105);
+    paddle2->setPos(500, 105);
+    ball->setPos(150, 150);
+
+
     gameTimer = new QTimer(this);
-    gameTimer->setInterval(300);
+    gameTimer->setInterval(30);
     gameTimer->start();
 
     QObject::connect(gameTimer, SIGNAL(timeout()), this,
@@ -52,4 +58,22 @@ void pong::play()
     }
 
     ball->moveBy(ballDir.x(), ballDir.y());
+
+    //check for collision with paddles
+
+    if ( ( paddle1->collidesWithItem(ball) ) && ( ballDir.y() < 0 ) )
+    {
+        ballDir.ry() *= -1;
+
+    }
+
+    if ( ( paddle2->collidesWithItem(ball) ) && ( ballDir.y() > 0 ) )
+    {
+        ballDir.ry() *= -1;
+
+    }
+
+
+
+
 }
