@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSize m(scene->sceneRect().size().width() + 10, scene->sceneRect().size().height() + 10);
 
-     qDebug() << "Scene size is : " << scene->sceneRect().size().width() << "..." ;
+    qDebug() << "Scene size is : " << scene->sceneRect().size().width() << "..." ;
 
     ui->graphicsView->setMaximumSize(m);
     ui->graphicsView->setMinimumSize(m);
